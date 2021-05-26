@@ -7,15 +7,14 @@
 <div class="media">
   <img class="align-self-start mr-3" src="{{program.poster}}" alt="{{ program.title }} poster">
   <div class="media-body">
-    <h1 class="mt-0">{{ program.title }}</h1>
-    <p>{{ program.summary }}</p>
-    <p>Catégorie : {{ program.category.name }}</p>
+    <h1 class="mt-0">Titre de la série {{ program.title }}</h1>
+    
   </div>
 
   <div>
-            <h2> saison numéro {{ season.number }} de {{ program.title }} ({{ season.year }})</h2>
-                        <p>{{ season.description }}</p>
-  {% for episode in episodes  %}
+            <h2> saison numéro {{ season.number }}</h2>
+
+
 <div class="card">
   <div class="card-header">
     épisode numéro {{ episode.number }}
@@ -23,14 +22,12 @@
   <div class="card-body">
     <h5 class="card-title">{{ episode.title }}</h5>
     <p class="card-text">{{ episode.synopsis }}</p>
-    <a href="{{ path("program_episode_show", { program: program.id, season: season.number, episode: episode.number }) }}" class="btn btn-primary">Voir les détails</a>
   </div>
-  
 </div>
             
         
 
-    {% endfor %}
+
     
         </div>
 </div>
