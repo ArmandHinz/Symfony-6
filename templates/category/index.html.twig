@@ -3,16 +3,6 @@
 {% block title %}All programs{% endblock %}
 
 {% block body %}
-    <h1>Toutes les séries de la table program : </h1>
-    {% for category in categories %}
-        <div>
-            <h2><a href="{{ path('category_name', { cat: category.name }) }}">{{ category.name }}</a></h2>
-        </div>
-    {% else %}
-        Aucune catégorie trouvée.
-    {% endfor %}
-
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
+    <h1>Yo bienvenue dans wild séries</h1>
+    
 {% endblock %}

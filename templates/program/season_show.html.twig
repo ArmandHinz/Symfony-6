@@ -11,21 +11,28 @@
     <p>{{ program.summary }}</p>
     <p>Catégorie : {{ program.category.name }}</p>
   </div>
-  {% for season in seasons  %}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">saison numéro {{ season.number }} de l'année {{ season.year }}</h5>
-        
-        <a href="{{ path("program_season_show", { programId: program.id, seasonId: season.number }) }}" class="btn btn-primary">Voir les détails</a>
-      </div>
-    </div>
-  </div>
-  </div>
 
+  <div>
+            <h2> saison numéro {{ season.number }} de {{ program.title }} ({{ season.year }})</h2>
+                        <p>{{ season.description }}</p>
+  {% for episode in episodes  %}
+<div class="card">
+  <div class="card-header">
+    épisode numéro {{ episode.number }}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ episode.title }}</h5>
+    <p class="card-text">{{ episode.synopsis }}</p>
+  </div>
+</div>
+            
+        
 
     {% endfor %}
+    
+        </div>
+</div>
+
 <a href="{{ path('program_index') }}">
     Retour à la liste des programmes
 </a>
