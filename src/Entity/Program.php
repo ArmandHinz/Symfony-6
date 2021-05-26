@@ -38,6 +38,12 @@ class Program
      */
     private $Category;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="programs")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;

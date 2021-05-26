@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+$theme-colors: (
+  "primary": rgba(238, 120, 120, 1),
+  "secondary": rgba(196, 196, 196, 0.71)
+);
+@import "~bootstrap/scss/bootstrap";

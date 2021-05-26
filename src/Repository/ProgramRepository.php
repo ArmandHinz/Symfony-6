@@ -47,4 +47,18 @@ class ProgramRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findByJoinedToCategory(int $catId): ?Program
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p, c
+            FROM App\Entity\Program p
+            JOIN p.category c
+            WHERE p.category_id = :id'
+        )->setParameter('id', $catId);
+
+        return $query->getOneOrNullResult();
+    }
 }
