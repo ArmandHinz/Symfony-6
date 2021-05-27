@@ -35,12 +35,6 @@ class Program
     private $poster;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Category::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Category;
-
-    /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="programs")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -109,12 +103,12 @@ class Program
 
     public function getCategory(): ?Category
     {
-        return $this->Category;
+        return $this->category;
     }
 
     public function setCategory(?Category $Category): self
     {
-        $this->Category = $Category;
+        $this->category = $Category;
 
         return $this;
     }
