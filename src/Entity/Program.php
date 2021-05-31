@@ -5,13 +5,18 @@ namespace App\Entity;
 use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
+ * 
  */
 class Program
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -21,11 +26,29 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @assert\NotBlank ()
+     * @assert\Length(max="255", maxMessage="La catégorie saisie est trop longue, elle ne devrait pas dépasser {{ limit }} caractères")
      */
     private $title;
 
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addConstraint(new UniqueEntity([
+            'fields' => 'title',
+        ]));
+
+        $metadata->addPropertyConstraint('title', new Assert\Regex([
+            'pattern' => '/Plus belle la vie/',
+            'match' => false,
+            'message' => 'On parle de vraies séries ici',
+        ]));
+    }
+
+
+
     /**
      * @ORM\Column(type="text")
+     * @assert\NotBlank ()
      */
     private $summary;
 
@@ -55,10 +78,12 @@ class Program
      */
     private $seasons;
 
+
     public function __construct()
     {
         $this->seasons = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {

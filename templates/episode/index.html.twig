@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Program</th>
                 <th>Title</th>
                 <th>Number</th>
                 <th>Synopsis</th>
@@ -19,6 +20,7 @@
         {% for episode in episodes %}
             <tr>
                 <td>{{ episode.id }}</td>
+                <td>{{ episode.season.program.title }}</td>
                 <td>{{ episode.title }}</td>
                 <td>{{ episode.number }}</td>
                 <td>{{ episode.synopsis }}</td>

@@ -20,6 +20,7 @@ class EpisodeController extends AbstractController
      */
     public function index(EpisodeRepository $episodeRepository): Response
     {
+
         return $this->render('episode/index.html.twig', [
             'episodes' => $episodeRepository->findAll(),
         ]);
@@ -83,7 +84,7 @@ class EpisodeController extends AbstractController
      */
     public function delete(Request $request, Episode $episode): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$episode->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $episode->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($episode);
             $entityManager->flush();
