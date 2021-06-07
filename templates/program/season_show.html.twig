@@ -23,7 +23,7 @@
   <div class="card-body">
     <h5 class="card-title">{{ episode.title }}</h5>
     <p class="card-text">{{ episode.synopsis }}</p>
-    <a href="{{ path("program_episode_show", { program: program.id, season: season.id, episode: episode.id }) }}" class="btn btn-primary">Voir les détails</a>
+    <a href="{{ path("program_episode_show", { program: program.id, season: season.id, slug: episode.slug }) }}" class="btn btn-primary">Voir les détails</a>
   </div>
   
 </div>

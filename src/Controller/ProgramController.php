@@ -10,6 +10,7 @@ use App\Entity\Program;
 use App\Entity\Season;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\ProgramType;
+use App\Service\Slugify;
 
 /**
  * @Route("/programs", name="program_")
@@ -22,7 +23,7 @@ class ProgramController extends AbstractController
      *
      * @Route("/new", name="new")
      */
-    public function new(Request $request): Response
+    public function new(Request $request, Slugify $slugify): Response
     {
         // Create a new Category Object
         $program = new Program();
@@ -34,6 +35,8 @@ class ProgramController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             // Deal with the submitted data
             // Get the Entity Manager
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
             $entityManager = $this->getDoctrine()->getManager();
             // Persist Category Object
             $entityManager->persist($program);
@@ -67,11 +70,12 @@ class ProgramController extends AbstractController
     /**
      * Getting a program by id
      *
-     * @Route("/show/{program}", name="show")
+     * @Route("/show/{slug}", name="show")
      * @return Response
      */
     public function show(Program $program): Response
     {
+
         $seasons = $program->getSeasons();
 
         if (!$program) {
@@ -106,7 +110,7 @@ class ProgramController extends AbstractController
     /**
      * Getting a episode by season and program
      *
-     * @Route("/{program}/seasons/{season}/episode/{episode}", name="episode_show")
+     * @Route("/{program}/seasons/{season}/episode/{slug}", name="episode_show")
      * @return Response
      */
     public function showEpisode(Program $program, Season $season, Episode $episode)
