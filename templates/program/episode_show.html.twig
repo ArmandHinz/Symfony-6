@@ -24,14 +24,29 @@
     <p class="card-text">{{ episode.synopsis }}</p>
   </div>
 </div>
-            
+
+<div class="card">
+  <div class="card-header">
+  {% for comment in comments %}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ comment.author.username }}</h5>
+    <p class="card-text">{{ comment.comment }}</p>
+    <p class="card-text">rate {{ comment.rate }}</p>
+    {% endfor %}
+  </div>
+</div>     
         
 
 
     
         </div>
 </div>
-
+{% if app.user %}
+<a href="{{ path("comment_new", { slug: episode.slug }) }}">
+    Commenter
+</a>
+{% endif %}
 <a href="{{ path('program_index') }}">
     Retour à la liste des programmes
 </a>

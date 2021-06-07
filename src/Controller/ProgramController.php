@@ -13,6 +13,8 @@ use App\Form\ProgramType;
 use App\Service\Slugify;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\MailerInterface;
+use App\Entity\Comment;
+
 
 /**
  * @Route("/programs", name="program_")
@@ -124,10 +126,18 @@ class ProgramController extends AbstractController
      */
     public function showEpisode(Program $program, Season $season, Episode $episode)
     {
+        $comments = $this->getDoctrine()
+            ->getRepository(Comment::class)
+            ->findBy(
+                array(),
+                array('id' => 'DESC')
+            );
+
         return $this->render('program/episode_show.html.twig', [
             'program' => $program,
             'season' => $season,
             'episode' => $episode,
+            'comments' => $comments
         ]);
     }
 }
