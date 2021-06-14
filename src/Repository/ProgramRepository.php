@@ -6,6 +6,7 @@ use App\Entity\Program;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @method Program|null find($id, $lockMode = null, $lockVersion = null)
  * @method Program|null findOneBy(array $criteria, array $orderBy = null)
@@ -36,15 +37,27 @@ class ProgramRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Program
+
+    public function findLikeName(string $name)
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->where('p.title LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('p.title', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
     }
-    */
+
+    public function findByTitleOrLastname(string $name)
+    {
+        $queryBuilder = $this->createQueryBuilder('p')
+            ->join('p.actors', 'pa')
+            ->andWhere('p.title LIKE :name OR pa.name LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('p.title', 'ASC')
+            ->getQuery();
+
+        return $queryBuilder->getResult();
+    }
 }

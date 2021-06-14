@@ -4,6 +4,10 @@
 
 {% block body %}
     <h1>Toutes les séries de la table program : </h1>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button>Search</button>
+        {{ form_end(form) }}
     {% for program in programs %}
 
 
