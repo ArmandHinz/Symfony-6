@@ -13,10 +13,12 @@
          <li class="nav-item">
           {{ app.user.email }}
             <a href="{{ path('app_logout') }}"> Se déconnecter</a>
+            <a href="{{ path('user_show', {'id': app.user.id}) }}"> Mon compte</a>
         </li>
         {% else %}
          <li class="nav-item">
           <a href="{{ path('app_login') }}"> Se connecter</a>
+          <a href="{{ path('app_register') }}"> S'inscrire</a>
         </li>
         {% endif %}
           
