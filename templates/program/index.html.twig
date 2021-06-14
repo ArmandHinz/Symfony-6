@@ -12,6 +12,7 @@
             <p>{{ program.summary }}</p>
             {# Lien vers la fiche de la série : #}
             <a href="{{ path("program_show", { slug: program.slug }) }}">Voir la fiche</a>
+            <a href="{{ path("program_edit", { slug: program.slug }) }}">Editer</a>
         </div>
     {% else %}
         Aucune série trouvée.

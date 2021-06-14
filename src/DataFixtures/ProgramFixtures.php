@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Program;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -22,11 +23,13 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i = 0; $i < 5; $i++) {
+            $user = new User();
             $program = new Program();
             $slug = $this->slugify->generate('Walking dead' . $i);
             $program->setSlug($slug);
             $program->setTitle('Walking dead' . $i);
             $program->setSummary('Des zombies envahissent la terre');
+            $program->setOwner($this->getReference('admin'));
             $program->setPoster('https://cdn.pixabay.com/photo/2021/03/01/09/29/woman-6059236__340.jpg');
             $program->setCountry('Test');
             $program->setYear(2000 + 2 * $i);
