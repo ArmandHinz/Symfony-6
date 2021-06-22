@@ -186,9 +186,8 @@ class ProgramController extends AbstractController
     /**
      * @Route("/{id}/watchlist", name="watchlist")
      */
-    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    public function addToWatchlist(Program $program, EntityManagerInterface $entityManager): Response
     {
-        $seasons = $program->getSeasons();
         if ($this->getUser()->isInWatchlist($program)) {
             $this->getUser()->removeWatchlist($program);
         } else {
@@ -196,9 +195,8 @@ class ProgramController extends AbstractController
         }
         $entityManager->flush();
 
-        return $this->render('program/show.html.twig', [
-            'program' => $program,
-            'seasons' => $seasons,
+        return $this->json([
+            'isInWatchlist' => $this->getUser()->isInWatchlist($program)
         ]);
     }
 }
