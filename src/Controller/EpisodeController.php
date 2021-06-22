@@ -51,6 +51,8 @@ class EpisodeController extends AbstractController
                 ->html($this->renderView('episode/newEpisodeEmail.html.twig', ['episode' => $episode]));
 
             $mailer->send($email);
+            $this->addFlash('success', 'The new program has been created');
+
             return $this->redirectToRoute('episode_index');
         }
 

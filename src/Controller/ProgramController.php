@@ -17,6 +17,7 @@ use App\Entity\Comment;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use App\Repository\ProgramRepository;
 use App\Form\SearchProgramType;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/programs", name="program_")
@@ -57,6 +58,7 @@ class ProgramController extends AbstractController
                 ->html($this->renderView('program/newProgramEmail.html.twig', ['program' => $program]));
 
             $mailer->send($email);
+            $this->addFlash('success', 'The new program has been created');
             return $this->redirectToRoute('program_index');
         }
         // Render the form
@@ -178,6 +180,25 @@ class ProgramController extends AbstractController
         return $this->render('program/edit.html.twig', [
             'program' => $program,
             'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/watchlist", name="watchlist")
+     */
+    public function addToWatchlist(Request $request, Program $program, EntityManagerInterface $entityManager): Response
+    {
+        $seasons = $program->getSeasons();
+        if ($this->getUser()->isInWatchlist($program)) {
+            $this->getUser()->removeWatchlist($program);
+        } else {
+            $this->getUser()->addWatchlist($program);
+        }
+        $entityManager->flush();
+
+        return $this->render('program/show.html.twig', [
+            'program' => $program,
+            'seasons' => $seasons,
         ]);
     }
 }
