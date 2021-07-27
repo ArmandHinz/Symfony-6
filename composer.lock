@@ -6627,22 +6627,22 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v5.2.10",
+            "version": "v5.2.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "dc49cfb0d1d1bf6a9aaccccee570ef62e7b095c4"
+                "reference": "7b4ef368b25bbb758a7bd5fe20349433e84220ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/dc49cfb0d1d1bf6a9aaccccee570ef62e7b095c4",
-                "reference": "dc49cfb0d1d1bf6a9aaccccee570ef62e7b095c4",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/7b4ef368b25bbb758a7bd5fe20349433e84220ed",
+                "reference": "7b4ef368b25bbb758a7bd5fe20349433e84220ed",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/polyfill-mbstring": "~1.0",
-                "symfony/polyfill-php80": "^1.15",
+                "symfony/polyfill-php80": "^1.16",
                 "symfony/translation-contracts": "^2.3"
             },
             "conflict": {
@@ -6656,7 +6656,7 @@
                 "symfony/translation-implementation": "2.3"
             },
             "require-dev": {
-                "psr/log": "~1.0",
+                "psr/log": "^1|^2|^3",
                 "symfony/config": "^4.4|^5.0",
                 "symfony/console": "^4.4|^5.0",
                 "symfony/dependency-injection": "^5.0",
@@ -6700,7 +6700,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v5.2.10"
+                "source": "https://github.com/symfony/translation/tree/v5.2.12"
             },
             "funding": [
                 {
@@ -6716,7 +6716,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:40:38+00:00"
+            "time": "2021-07-21T13:17:02+00:00"
         },
         {
             "name": "symfony/translation-contracts",
