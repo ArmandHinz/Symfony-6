@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\ProgramRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
@@ -56,6 +58,22 @@ class Program
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $poster;
+
+    /**
+     * @Vich\UploadableField(mapping="poster_file", fileNameProperty="poster")
+     * @Assert\File(
+     *     maxSize = "1M",
+     *     mimeTypes = {"image/jpeg", "image/png", "image/webp"},
+     * )
+     * @var File
+     */
+    private $posterFile;
+
+
+    /**
+     * @ORM\Column(type="Datetime")
+     */
+    private DateTimeInterface $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="programs")
@@ -290,5 +308,30 @@ class Program
         }
 
         return $this;
+    }
+
+    /**
+     * Get the value of posterFile
+     *
+     * @return  File
+     */
+    public function getPosterFile()
+    {
+        return $this->posterFile;
+    }
+
+    /**
+     * Set the value of posterFile
+     *
+     * @param  File  $posterFile
+     *
+     * @return  self
+     */
+    public function setPosterFile(File $image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 }

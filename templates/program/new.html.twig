@@ -2,6 +2,7 @@
 {% block body %}
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
     {{ form_widget(form) }}
+    <input type="file" id="program_posterFile_file" name="program[posterFile][file]">
     <input type='submit' value='Add category'>
     {{ form_end(form) }}
 {% endblock %}
